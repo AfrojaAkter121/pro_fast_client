@@ -1,8 +1,10 @@
-import React from "react";
-import { NavLink } from "react-router";
+import React, { useContext } from "react";
+import { Link, NavLink } from "react-router";
 import ProFastLogo from "../ProfastLogo/ProFastLogo";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Navbar = () => {
+  const {user, logOut} = useContext(AuthContext)
 
     const  navLink = <>
         <li>
@@ -10,6 +12,9 @@ const Navbar = () => {
         </li>
         <li>
             <NavLink to='/about'>About Us</NavLink>
+        </li>
+        <li>
+            <NavLink to='/coverage'>Coverage</NavLink>
         </li>
     </>
   return (
@@ -49,7 +54,18 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        {
+          user ? (
+            <div className="flex gap-4">
+               <img src={user?.photoURL} className="w-12 h-12 rounded-full" alt=""/>
+            <button onClick={logOut} className="bg-[#CAEB66] px-4 rounded-lg">Log Out</button>
+          </div>
+          ):
+          <div>
+          <Link to='/login' className="py-2 px-4 border border-gray-300 mr-3 rounded-lg">Log in</Link>
+          <Link to='/register' className="bg-[#CAEB66] py-2 px-3 rounded-lg">Register</Link>
+        </div>
+        }
       </div>
     </div>
     </div>
