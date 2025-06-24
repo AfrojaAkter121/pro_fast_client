@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import ProFastLogo from "../ProfastLogo/ProFastLogo";
 import { AuthContext } from "../Provider/AuthProvider";
+import DarkModeToggle from "./DarkModeToggle/DarkModeToggle";
 
 const Navbar = () => {
   const {user, logOut} = useContext(AuthContext)
@@ -11,15 +12,23 @@ const Navbar = () => {
             <NavLink to='/'>Home</NavLink>
         </li>
         <li>
+            <NavLink to='/sendParcel'>Send Parcel</NavLink>
+        </li>
+        <li>
             <NavLink to='/about'>About Us</NavLink>
         </li>
         <li>
             <NavLink to='/coverage'>Coverage</NavLink>
         </li>
+        {
+          user &&  <li>
+          <NavLink to='/dashBoard'>Dashboard</NavLink>
+          </li>
+        }
     </>
   return (
     <div className="pt-5">
-         <div className="navbar bg-base-100 shadow-sm max-w-7xl mx-auto rounded-2xl  ">
+         <div className="navbar bg-base-100 shadow-sm max-w-7xl mx-auto rounded-2xl bg-white text-black">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -54,6 +63,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
+        <DarkModeToggle/>
         {
           user ? (
             <div className="flex gap-4">
